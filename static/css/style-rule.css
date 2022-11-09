@@ -1,0 +1,48 @@
+.block-rule{
+  margin-top: 1em;
+  border-radius: 5px;
+}
+
+.all-rule{
+  margin-bottom: 4em;
+}
+
+.panel, .flip {
+  padding: 10px;
+  font-size: 15pt;
+  line-height: 1.5;
+  text-align: center;
+  }
+
+.flip{
+  background: radial-gradient(circle, rgba(63,94,251,0.6226201432474543) 0%, rgba(252,70,107,0.4456538511126229) 100%);
+  letter-spacing: 3px;
+  font-size: 17pt;
+  color: #FFFFF0;
+  border-radius: 5px;
+}
+
+
+.panel {
+  margin-top: 10px;
+  padding: 20px;
+  display: none;
+}
+
+#rules .box_2{
+  padding-top: 0em;
+}
+
+.rec{
+  display: contents;
+}
+
+.cls-btn-rec{
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.cls-btn-rec:hover{
+  background-color: #757575;
+}
