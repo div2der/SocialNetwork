@@ -1,0 +1,41 @@
+{% extends "base.html"%} 
+
+
+
+{% block name_page_1 %}
+  Explore
+{% endblock %}
+
+{% block name_page_2 %}
+  All Posts
+{% endblock %}
+
+{% block main %}
+<div>
+    {% for post in context.posts%}  
+
+    <div class="container-fluid py-4 profile_box">
+        <div class="col-12" style="padding-right: 0; padding-left: 0;">
+            <div class="bg-menu h-100 border-1">
+            <div class="card-header pb-0 p-3">
+                <div class="row">
+                <div class="">
+                    <h6 class="mb-0" style="color: #ffffff; margin-left: 45%;">{{post.title}}</h6>
+                </div> 
+                </div>
+            </div>
+            <div class="card-body p-3">                          
+                <div><p style="margin-left: 20%; margin-right: 20%; margin-top: 20px;">Mood: {{post.mood}}</p></div>                                           
+            </div>
+            <div class="card-body p-3">                          
+                        <div><p style="margin-left: 20%; margin-right: 20%; margin-top: 20px;">{{post.text_about}}</p></div>                                           
+            </div>
+             
+        </div>
+        
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
