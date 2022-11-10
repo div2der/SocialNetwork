@@ -21,7 +21,7 @@
       <header>
         <div class="conteiner">
               <nav class="navbar navbar-expand-lg navbar-dark ">
-                <a class="navbar-brand" href="index.html" name="top">
+                <a class="navbar-brand" href="{{ url_for('home') }}" name="top">
                   <img src="{{ url_for('static', filename='image/v_4_fav.svg') }}" width="50" height="30" class="d-inline-block align-top" alt="">
                   <strong>  Your live </strong>
                 </a>
@@ -62,7 +62,7 @@
                       <span class="nav-link-text ms-1">Logout</span>
                     </a>
                   </li>
-                  <li><a class="nav-link scrollto" href="{{ url_for('upload_file')}}">Upload File</a></li>
+                  <li class = "nav-item"><a class="nav-link scrollto" href="{{ url_for('post_upload')}}"><span class="nav-link-text ms-1">Upload post</span></a></li>
                   {% else %}
                   <li class="nav-item">
                     <a class="nav-link  {% block active_si %}{% endblock %}" href="{{ url_for('login') }}">
@@ -84,16 +84,18 @@
         
           <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
             <form action = "/login" method = "POST">
-              <div class="form-outline mb-4">
-                <input type="text" id="form2Example2" class="form-control" name = "username"/>
-                <label class="form-label" for="form2Example2">Username</label>
-              </div>
-              <div class="form-outline mb-4">
-                <input type="password" id="form2Example2" class="form-control" name = "password" />
-                <label class="form-label" for="form2Example2">Password</label>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
-            </form>
+              <div class = "container">
+                <div class="form-outline mb-4">
+                  <input type="text" id="form2Example2" class="form-control" name = "username"/>
+                  <label class="form-label" for="form2Example2">Username</label>
+                </div>
+                <div class="form-outline mb-4">
+                  <input type="password" id="form2Example2" class="form-control" name = "password" />
+                  <label class="form-label" for="form2Example2">Password</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
+              </form>
+            </div>
           </main>
         </div>
       </div>

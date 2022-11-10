@@ -1,12 +1,14 @@
 from flask_app import *
 from flask import render_template
 from flask import request, session, redirect, url_for
+from flask_socketio import SocketIO, send
 from werkzeug.utils import secure_filename
 import hashlib
 import os
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
+socketio = SocketIO(app, cors_allowed_origins = "*")
 
 class User(db.Model):
     __tablename__ = "User"
@@ -43,15 +45,6 @@ def home(context = None):
 @app.route("/")
 def index(context=None):
     return render_template("base.html", context=None)
-
-@app.route("/user/<int:user_id>")
-def user_page(user_id, context=None):
-    query = db.session.query(User).join(Project).filter(Project.pr_author == user_id).first()
-    if query:
-        return render_template("user page.html", context=query)
-    else:
-        query = db.session.query(User).filter(User.user_id == user_id).first()
-        return render_template("user page.html", context=query)
 
 @app.route('/register', methods = ["GET", "POST"])
 def register(context=None):
@@ -105,38 +98,20 @@ def post_upload(context = None):
         return render_template("post_upload.html", context = "Post succesfully uploaded!")
     return render_template("post_upload.html", context = None) 
 
-@app.route("/upload", methods=["GET", "POST"])
-def upload_file(context=None):
-    if request.method=="POST":
-        f = request.files["file_to_save"]
-        f.save(f"static/img/{secure_filename(f.filename)}")
-        return redirect(url_for('upload_file', context={"Status":"Successfully uploaded"}))
-    return render_template("file upload.html", context=context)
+@socketio.on('message')
+def handle_message(message):
+    print("Received message: " + message)
+    print(request)
+    if message != 'user connected':
+        send(message, broadcast = True)
 
-
-@app.route("/add_project", methods=["GET", "POST"])
-def add(context=None):
-    if request.method == "POST":
-        title = request.form['title']
-        info_pr = request.form['info_pr']
-        data = db.session.query(Project).filter_by(title=request.form['title']).first()
-        
-        print(data)
-
-        if data :
-            return redirect(url_for("add", error="Project Add"))
-        else:
-            
-            crud.add_user(Project(title=title, 
-                                text_about=info_pr,
-                                pr_author=session['uid']
-                                ))
-            return redirect(url_for("profile", context="Succesfully registered!"))
-    return render_template("add_pr.html", context=context)
+@app.route("/general_chat")
+def general_chat(context = None):
+    return render_template("general_chat.html")
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-        app.run()
+        socketio.run(app)
 
 
