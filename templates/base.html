@@ -56,14 +56,6 @@
                   </a>
                 </li>
                 {% if session.authenticated %}
-                <li class="nav-item mt-3">
-                  <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link  {% block active_prof %}{% endblock %}" href="{{ url_for('user_page', user_id=session.uid) }}">
-                    
-                    <span class="nav-link-text ms-1"></span>
-                  {{session.username | capitalize}}</a></li>
                   <li class="nav-item">
                     <a class="nav-link  {% block active_project %}{% endblock %}" href="{{ url_for('logout')}}">
                       
@@ -91,19 +83,25 @@
             </aside>
         
           <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-            <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-              <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{% block name_page_1 %}{% endblock %}</li>
-                  </ol>
-                  <h6 class="font-weight-bolder mb-0">{% block name_page_2 %}{% endblock %}</h6>
-                </nav>
-                
+            {% if session.authenticated %}
+            <div class = "container my-5">
+              <div class = "row align-items-center">
+                <div class = "col">
+                  {% if posts %}
+                    {% for post in posts %}
+                    <div class = "card my-3" style = "color: black">
+                      <img src = "{{ url_for('static', filename = 'files/' + post.post_username + '/' + post.post_media_name) }}" class = "card-img-top">
+                      <div class = "card-body">
+                        <h5 class = "card-title">{{ post.post_text }}</h5>
+                        <p class = "card-text">From {{ post.post_username }}</p>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
               </div>
-            </nav>
+            </div>
+            {% endif %}
           </main>
         </div>
       </div>

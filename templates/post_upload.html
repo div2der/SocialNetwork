@@ -83,24 +83,16 @@
             </aside>
         
           <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-            <form action = "/register" method = "POST">
-              <div class="form-outline mb-4">
-                <input type="text" id="form2Example2" class="form-control" name = "username"/>
-                <label class="form-label" for="form2Example2">Username</label>
+            <form action = "{{ url_for('post_upload') }}" method = "POST" enctype="multipart/form-data">
+              <div class = "form-outline mb-4">
+                <label for = "formFile" class = "form-label">Upload an image</label><br>
+                <input type = "file" id = "formFile" name = "image_to_upload">
               </div>
-              <div class="form-outline mb-4">
-                <input type="email" id="form2Example1" class="form-control" name = "email" />
-                <label class="form-label" for="form2Example1">Email address</label>
+              <div class = "form-outline mb-4">
+                <input type="text" id="form2Example2" class="form-control" name = "caption" />
+                <label class="form-label" for="form2Example2">Caption</label>
               </div>
-              <div class="form-outline mb-4">
-                <input type="password" id="form2Example2" class="form-control" name = "password" />
-                <label class="form-label" for="form2Example2">Password</label>
-              </div>
-              <div class="form-outline mb-4">
-                <input type="password" id="form2Example2" class="form-control" name = "confirm_password" />
-                <label class="form-label" for="form2Example2">Confirm password</label>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block mb-4">Register</button>
+              <button type="submit" class="btn btn-primary btn-block mb-4">Upload</button>
             </form>
           </main>
         </div>
