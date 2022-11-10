@@ -1,0 +1,48 @@
+{% extends "base.html"%} 
+
+
+{% block active_prof %}
+  active
+{% endblock %}
+
+{% block name_page_1 %}
+  Profile
+{% endblock %}
+
+{% block name_page_2 %}
+  User - {{ session.username }}
+{% endblock %}
+
+{% block main %}
+
+<main class="main-content possition-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+	<div class="message_box">
+	<div class = "container" id = "messages">
+	  <script type="text/javascript">
+		$(document).ready(function() {
+		  var socket = io.connect('http://' + document.domain + ':' + location.port)
+		  socket.on('connect', function() {
+			socket.send('user connected');
+		  });
+
+		  socket.on('message', function(data) {
+			$('#messages').append($('<p>').text(data));
+		  });
+
+		  $('#sendMessage').on('click', function() {
+			if ($('#message').val().length > 0) {
+			  socket.send("{{session['username']}}" + ': ' + $('#message').val());
+			  $('#message').val('');
+			};
+		 });
+		})
+	  </script>
+	</div>
+	
+	</div>	
+	<div class="text-btn"> 
+		<input type = "text" id = "message" placeholder="Message" class="border-half text-box" required>
+		<button class="btn btn-primary  border-half btn-block mb-4" id = "sendMessage"  >Send</button>
+	</div>
+  </main>
+{% endblock %}

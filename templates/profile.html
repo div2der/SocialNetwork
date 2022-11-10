@@ -1,0 +1,121 @@
+{% extends "base.html"%} 
+
+
+{% block active_prof %}
+  active
+{% endblock %}
+
+{% block name_page_1 %}
+  Profile
+{% endblock %}
+
+{% block name_page_2 %}
+  User - {{ session.username }}
+{% endblock %}
+
+{% block main %}
+
+<div class="container-fluid profile_box">
+  <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url({{url_for('static', filename='image/curved-images/curved0.jpg') }})">
+    <span class="mask bg-gradient-primary opacity-6"></span>
+  </div>
+  <div class="black-bg card-body blur shadow-blur mx-4 mt-n6 overflow-hidden border-1 bg-menu">
+    <div class="row gx-4">
+      <div class="col-auto">
+        
+      </div>
+      <div class="col-auto my-auto">
+        <div class="h-100">
+          {% if context %}
+          <h5 class="mb-1">
+            {{ context.first_name }} {{ context.second_name }}
+          </h5>
+          {% endif %}
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+<div class="container-fluid py-4 profile_box">
+  <div class="row">
+    
+    <div class=" col-12 col-xl-4 ">
+      <div class="bg-menu h-100 border-1">
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+            <div class="col-md-8 d-flex align-items-center">
+              <h6 class="mb-0" style="color: #ffffff;">Profile Information</h6>
+            </div>
+            
+          </div>
+        </div>
+        <div class="">
+          <p class="text-sm">
+           {{ context.info }}
+          </p>
+          <ul class="" style="list-style: none;">
+            
+            <li class="border-0 ps-0 text-sm"><strong >Mobile:</strong> &nbsp; {{ context.mobile }}</li>
+            <li class="border-0 ps-0 text-sm"><strong >Email:</strong> &nbsp; {{ context.email }}</li>
+            <li class="border-0 ps-0 text-sm"><strong >Location:</strong> &nbsp; {{ context.location }}</li>
+            <li class="border-0 ps-0 text-sm"><strong >Date of Birth:</strong> &nbsp; {{ context.d_of_b }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-xl-8 ">
+      <div class="bg-menu h-100 border-1">
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+            
+          </div>
+        </div>
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+            <div class="col-md-8 d-flex align-items-center">
+              <a href="{{url_for('add')}}" class="mb-0">Create Post</a>
+            </div> 
+          </div>
+        </div>
+        <div class="card-body p-3">
+          <hr class="horizontal gray-light my-4">
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+    {% if context.posts%}
+                    {% for post in context.posts%}  
+            <div class="container-fluid py-4 profile_box">
+                <div class="col-12" style="padding-left: 0; padding-right: 0%;">
+                    <div class="bg-menu h-100 border-1">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                        <div class="">
+                            <h6 class="mb-0" style="color: #ffffff; margin-left: 30%; margin-right: 30%;">{{post.title}}</h6>
+                        </div> 
+                        </div>
+                    </div>
+                    <div class="card-body p-3">                          
+                        <div><p style="margin-left: 20%; margin-right: 20%;">Mood: {{post.mood}}</p></div>                                           
+                    </div>
+                    <div class="card-body p-3">
+                                <div><p style="margin-left: 20%; margin-right: 20%; margin-top: 20px;">{{post.text_about}}</p></div>
+                        
+                              <div><img style="width: 18rem;" src="{{ url_for('static', filename='files/'+ post.post_username  + '/' + post.post_media_name) }}" alt=""></div>
+                                
+                    </div>
+                     
+                </div>
+                
+            </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+{% endblock %}

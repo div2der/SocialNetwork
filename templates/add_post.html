@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block name_page_1 %}
+  Profile
+{% endblock %}
+
+{% block name_page_2 %}
+  Create Post
+{% endblock %}
+
+{% block main %}
+<section class="mb-6 our-fonts">
+    <div class="page-header align-items-start min-vh-24 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url( {{url_for('static', filename='image/lk-bg.jpg') }})">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n20 mt-md-n11 mt-n0">
+        <div class="col-xl-6 col-lg-5 col-md-4 mx-auto">
+          <div class="card z-index-0 border-1">
+            <div class="card-header text-center pt-4">
+              <h3>Create Post</h3>
+            </div>
+            <div class="row px-xl-5 px-sm-4 px-3">
+              <div class="card-body " >
+                <form action="{{ url_for('add')}}" method="POST" enctype="multipart/form-data">
+                  <label>Title Post</label>  
+                  <div class="mb-3 border-half">
+                      <input type="text" class="form-control border-half" name="title" placeholder="Enter Title" required>
+                    </div> 
+                    <label>Your</label>  
+                    <div class="mb-3 border-half">
+                      <input type="text"  class="form-control border-half" name="mood" placeholder="Choose emoji" ></textarea>
+                    </div>
+                    <label>Text</label>  
+                    <div class="mb-3 border-half">
+                      <textarea type="text"  class="form-control border-half" name="info_post" placeholder="Write your text..." style="resize: none; height: 200px"></textarea>
+                    </div>
+                    <label>Image</label>  
+                    <div class="mb-3 border-half">
+                      <input type="file"  class="form-control border-half" name="image_to_upload">
+                    </div>  
+                    
+                    
+                    <div class="mb-3 ">
+                      <input type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2 border-half" value="Send">
+                    </div> 
+                 </form> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+{% endblock%}
