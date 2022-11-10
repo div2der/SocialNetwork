@@ -17,6 +17,7 @@ def hash_password(password):
 def index(context = None):
     posts = Post.query.all()
     return render_template("home.html", posts = posts[::-1])
+
 @app.route("/")
 def home(context=None):
     posts = Post.query.all()
@@ -111,11 +112,9 @@ def upload_file(context=None):
 def add(context=None):
     if request.method == "POST":
         image = request.files['image_to_upload']
-
         title = request.form['title']
         text_post = request.form['info_post']
         mood = request.form['mood']
-        
         try:
             image.save(f"static/files/{session['username']}/{secure_filename(image.filename)}")
         except FileNotFoundError:
@@ -132,6 +131,4 @@ def add(context=None):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-        app.run(host='192.168.131.66', port=2000)
-
-
+        app.run(port=2000)
