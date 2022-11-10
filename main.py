@@ -125,12 +125,6 @@ def add(context=None):
         crud.add_post(post)
 
         user = db.session.query(User).filter_by(login=session['username']).first()
-        
-        #crud.add_post(Post(title=title, 
-        #                        text_about=text_post,
-        #                        mood=mood,
-        #                        post_author=session['uid']
-        #                        ))
         return redirect(url_for("user_page", user_id=user.user_id))
     return render_template("add_post.html", context=context)
 
